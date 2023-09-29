@@ -11,12 +11,15 @@ import ufrn.br.estoque.service.EstoqueService;
 public class EstoqueController {
     EstoqueService service;
 
-//
-//    @PostMapping("/cadastrarEstoque")
-//    public String cadastrarEstoque(Estoque estoque){
-//        service.create(estoque);
-//        return "estoque criado com sucesso";
-//    }
+    public EstoqueController(EstoqueService service) {
+        this.service = service;
+    }
+
+    @PostMapping("/")
+    public String cadastrarEstoque(Estoque estoque){
+        service.create(estoque);
+        return "estoque criado com sucesso";
+    }
 
 
     @GetMapping("/")

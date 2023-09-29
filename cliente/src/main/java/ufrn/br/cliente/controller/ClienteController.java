@@ -2,9 +2,7 @@ package ufrn.br.cliente.controller;
 
 
 
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ufrn.br.cliente.model.Cliente;
 import ufrn.br.cliente.service.ClienteService;
 
@@ -12,14 +10,18 @@ import ufrn.br.cliente.service.ClienteService;
 public class ClienteController {
     ClienteService service;
 
+    public ClienteController(ClienteService service) {
+        this.service = service;
+    }
 
-    @PostMapping("/index")
-   public String cadastrarCliente(Cliente cliente){
-       service.create(cliente);
-       return "cadastrarCliente";
-   }
 
-   @DeleteMapping("/delete")
+    @PostMapping("/")
+    public String cadastrarCliente(@RequestBody Cliente cliente) {
+        service.create(cliente);
+        return "redirect:/index";
+    }
+
+    @DeleteMapping("/delete")
    public String delete(String cpf){
         service.delete(cpf);
         return "Cliente deletado com sucesso";
